@@ -28,19 +28,22 @@ class PatientData(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     create_date = db.Column(DateTime, default=datetime.utcnow, info={'label': 'Дата создания'})
-    doctor = db.Column(db.String(255), default='doctor', info={'label': 'Доктор'})
+    doctor = db.Column(db.String(255), info={'label': 'Пользователь'})
     full_name = db.Column(db.String(255), info={'label': 'ФИО'})
     gender = db.Column(db.Integer, info={'label': 'Пол'})
     birth_date = db.Column(db.Date, info={'label': 'Дата рождения'})
     age = db.Column(db.Integer, info={'label': 'Возраст'})
+    height = db.Column(db.Float, info={'label': 'Рост'})
+    weight = db.Column(db.Float, info={'label': 'Вес'})
+    bmi = db.Column(db.Float, info={'label': 'BMI (индекс массы тела)'})
     diagnosis_mkb = db.Column(db.String(255), info={'label': 'Диагноз по МКБ'})
     operation_date = db.Column(db.Date, info={'label': 'Дата операции'})
     operation_name = db.Column(db.String(255), info={'label': 'Название операции'})
     intervention_level = db.Column(db.String(255), info={'label': 'Уровень вмешательства'})
     time_between_primary_and_revision_operation = db.Column(db.Float, info={'label': 'Время между первичной и ревизионной операцией'})
-    neurological_deficit = db.Column(db.Boolean, info={'label': 'Неврологический дефицит'})
+    neurological_deficit = db.Column(db.Integer, info={'label': 'Неврологический дефицит'})
     charlson_index = db.Column(db.Float, info={'label': 'Индекс коморбидности Чарлсона'})
-    vash_before_operation = db.Column(db.Float, info={'label': 'ВАШ до операции'})
+    vash_before_operation = db.Column(db.Float, info={'label': 'ВАШ (визуально-аналоговая спина) до операции'})
     vash_1_month_after_operation = db.Column(db.Float, info={'label': 'ВАШ через 1 месяц после операции'})
     vash_3_months_after_operation = db.Column(db.Float, info={'label': 'ВАШ через 3 месяца после операции'})
     vash_6_months_after_operation = db.Column(db.Float, info={'label': 'ВАШ через 6 месяцев после операции'})
@@ -50,27 +53,36 @@ class PatientData(db.Model):
     odi_3_months_after_operation = db.Column(db.Float, info={'label': 'ODI через 3 месяца после операции'})
     odi_6_months_after_operation = db.Column(db.Float, info={'label': 'ODI через 6 месяцев после операции'})
     odi_12_months_after_operation = db.Column(db.Float, info={'label': 'ODI через 12 месяцев после операции'})
-    sf_before_operation = db.Column(db.Float, info={'label': 'SF 36 до операции'})
-    sf_1_month_after_operation = db.Column(db.Float, info={'label': 'SF 36 через 1 месяц после операции'})
-    sf_3_months_after_operation = db.Column(db.Float, info={'label': 'SF 36 через 3 месяца после операции'})
-    sf_6_months_after_operation = db.Column(db.Float, info={'label': 'SF 36 через 6 месяцев после операции'})
-    sf_12_months_after_operation = db.Column(db.Float, info={'label': 'SF 36 через 12 месяцев после операции'})
-    ct_before_operation = db.Column(db.String(255), info={'label': 'КТ'})
-    crb = db.Column(db.Float, info={'label': 'СРБ до операции'})
+    sf_before_operation = db.Column(db.Float, info={'label': 'SF-36 до операции'})
+    sf_1_month_after_operation = db.Column(db.Float, info={'label': 'SF-36 через 1 месяц после операции'})
+    sf_3_months_after_operation = db.Column(db.Float, info={'label': 'SF-36 через 3 месяца после операции'})
+    sf_6_months_after_operation = db.Column(db.Float, info={'label': 'SF-36 через 6 месяцев после операции'})
+    sf_12_months_after_operation = db.Column(db.Float, info={'label': 'SF-36 через 12 месяцев после операции'})
+    ct_before_operation = db.Column(db.String(255), info={'label': 'КТ (компьютерная томография) до операции'})
+    ct_1_month_after_operation = db.Column(db.String(255), info={'label': 'КТ через 1 месяц после операции'})
+    ct_3_months_after_operation = db.Column(db.String(255), info={'label': 'КТ через 3 месяца после операции'})
+    ct_6_months_after_operation = db.Column(db.String(255), info={'label': 'КТ через 6 месяцев после операции'})
+    ct_12_months_after_operation = db.Column(db.String(255), info={'label': 'КТ через 12 месяцев после операции'})
+    crb = db.Column(db.Float, info={'label': 'СРБ (с-реактивный белок) до операции'})
     osteoporosis = db.Column(db.Float, info={'label': 'Остеопороз (HU)'})
-    height = db.Column(db.Float, info={'label': 'Рост'})
-    weight = db.Column(db.Float, info={'label': 'Вес'})
-    bmi = db.Column(db.Float, info={'label': 'BMI'})
-    intraoperative_culture_result = db.Column(db.Boolean, info={'label': 'Интраоперационный посев'})
+    intraoperative_culture_result = db.Column(db.Integer, info={'label': 'Интраоперационный посев'})
+    pathogen = db.Column(db.String(255), info={'label': 'Интраоперационный посев (возбудитель)'})
     asa_risk = db.Column(db.Integer, info={'label': 'Риск по ASA'})
     blood_group = db.Column(db.Integer, info={'label': 'Группа крови'})
-    rh_factor = db.Column(db.Boolean, info={'label': 'Резус фактор'})
+    rh_factor = db.Column(db.Integer, info={'label': 'Резус-фактор'})
     complications = db.Column(db.String(255), info={'label': 'Осложнения'})
     mcnab_scale = db.Column(db.Integer, info={'label': 'Шкала Макнаб'})
     initial_platelet_level = db.Column(db.Float, info={'label': 'Исходный уровень тромбоцитов, *109/л'})
     final_platelet_level = db.Column(db.Float, info={'label': 'Конечный уровень тромбоцитов, *109/л'})
     final_thrombogel_volume = db.Column(db.Float, info={'label': 'Конечный объем тромбогеля, мл'})
-    alloimmunity = db.Column(db.Boolean, info={'label': 'Аллокость'})
+    alloimmunity = db.Column(db.Integer, info={'label': 'Аллокость'})
+
+    def calculate_bmi(self):
+        if self.height and self.weight:
+            height_meters = float(self.height) / 100  # Переводим рост из см в метры
+            self.bmi = round(float(self.weight) / (height_meters ** 2), 2)
+        else:
+            self.bmi = None
 
     def get_patient_number(self):
         try:
@@ -86,13 +98,6 @@ class PatientData(db.Model):
             return None
 
 
-# class StatisticsData(db.Model):
-#     __tablename__ = 'statistics_data'
-#
-#     id = db.Column(db.Integer, primary_key=True)
-#     column_name = db.Column(db.String(255))
-
-
 class StatisticsData(db.Model):
     __tablename__ = 'statistics_data'
 
@@ -106,14 +111,14 @@ class StatisticsData(db.Model):
 
 
 def statistics():
-    numeric_columns = ["age", "time_between_primary_and_revision_operation", "charlson_index",
-                       "vash_before_operation", "vash_1_month_after_operation", "vash_3_months_after_operation",
+    numeric_columns = ["gender", "age", "height", "weight", "bmi", "time_between_primary_and_revision_operation", "neurological_deficit",
+                       "charlson_index", "vash_before_operation", "vash_1_month_after_operation", "vash_3_months_after_operation",
                        "vash_6_months_after_operation", "vash_12_months_after_operation", "odi_before_operation",
                        "odi_1_month_after_operation", "odi_3_months_after_operation", "odi_6_months_after_operation",
                        "odi_12_months_after_operation", "sf_before_operation", "sf_1_month_after_operation",
                        "sf_3_months_after_operation", "sf_6_months_after_operation", "sf_12_months_after_operation",
-                       "crb", "osteoporosis", "height", "weight", "bmi", "asa_risk", "blood_group", "mcnab_scale",
-                       "initial_platelet_level", "final_platelet_level", "final_thrombogel_volume"]
+                       "crb", "osteoporosis", "asa_risk", "blood_group", "rh_factor", "mcnab_scale",
+                       "initial_platelet_level", "final_platelet_level", "final_thrombogel_volume", "alloimmunity"]
 
     if PatientData.query.count() < 2:
         return
